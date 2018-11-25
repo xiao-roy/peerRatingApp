@@ -1,4 +1,4 @@
-require 'sintra'
+require 'sinatra'
 require 'slim'
 require 'csv'
 require 'sqlite3'
