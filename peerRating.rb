@@ -15,6 +15,10 @@ end
 get '/createAccount' do
   slim :createAccount
 end
+
+get '/userHome' do
+  slim :userHome
+end
 # db = SQLite3::Database.new ":memory:"
 #
 # # Create a database

@@ -7,7 +7,7 @@ head
 / link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" /
 body
   h1 Create An Account
-  form
+  form action="/userHome"
     p Enter Username:
     input type="text" name="username"
     p Enter Password:
@@ -19,3 +19,8 @@ body
     input type="submit" value="Submit"
   h3 OR
   h1 Upload CSV
+  form action="/userHome"
+    input type="file" name="users" accept=".csv"
+    br
+    br
+    input type="submit"
