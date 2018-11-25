@@ -16,7 +16,13 @@ get '/createAccount' do
   slim :createAccount
 end
 
-get '/userHome' do
+get '/userHome?' do
+  @username = params['username']
+  @password = params['password']
+  @role = params['role']
+  if params['users']
+    addUsersFromCSV(params['users'])
+  end
   slim :userHome
 end
 # db = SQLite3::Database.new ":memory:"
