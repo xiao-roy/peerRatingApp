@@ -18,8 +18,7 @@ DataMapper.finalize()
 def addUsersFromCSV(filepath)
   csvUsers = CSV.read(filepath)
   for users in csvUsers
-    User.create(userName: users[1], role: users[2], password: users[3], vote: "No")
-    # acc.save
+    User.create(userName: users[0], role: users[2], password: users[1], vote: "No")
   end
 end
 
