@@ -7,15 +7,14 @@ head
 / link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" /
 body
   h1 Create An Account
-  form
-    p Enter Username:
-    input type="text" name="username"
-    p Enter Password:
-    input type="text" name="password"
-    p Confirm Password:
-    input type="text" name="password"
-    br
-    br
+  form action="/userHome" method="POST"
+    label for="username" Enter Username:
+    input#username type="text" name="user[userName]" value="#{@user.userName}"
+    label for="password" Enter Password:
+    input#password type="text" name="user[password]" value="#{@user.password}"
+    select name="user[role]"
+      option name="user[role]" value="student" Student
+      option name="user[role]" value="TA" TA
     input type="submit" value="Submit"
   h3 OR
   h1 Upload CSV
