@@ -4,11 +4,11 @@ require 'csv'
 require 'sqlite3'
 require './user'
 
-configure do
-  enable :sessions
-  set :username, 'frank'
-
-end
+# configure do
+#   enable :sessions
+#   set :username, 'frank'
+#
+# end
 
 get ('/styles.css') { scss :styles }
 
@@ -17,14 +17,23 @@ get '/' do
 end
 
 get '/login' do
+
   slim :login
 end
 
+get '/error' do
+  slim :error
+end
+
 post '/login' do
-    # order matters since settings.password is a BCrypt::Password
-    if settings.username == params[:username] && settings.password == params[:password]
-      session[:admin] = true
-      redirect to('/user_home')
+    @user = User.get(userName: params["username"])
+    puts @user.userName
+    if @user
+      if @user.role == 'TA'
+        redirect to('/userHomeTA')
+      elsif @user.role == 'student'
+        redirect to('/userHomeStudent')
+      end
     else
       slim :login
     end
@@ -54,9 +63,13 @@ get '/userHomeStudent' do
 end
 
 post '/userHome?' do
-  user = User.create(params[:user])
-  @role = user.role
-  if (@role == 'TA') ? (redirect to('/userHomeTA')) : (redirect to('/userHomeStudent'))
+  if params[:user]["userName"] !=~ /\A[a-z0-9_]{4,16}\z/
+    redirect to '/error'
+  else
+    @user = User.create(params[:user])
+    @role = @user.role
+    if (@role == 'TA') ? (redirect to('/userHomeTA')) : (redirect to('/userHomeStudent'))
+    end
   end
 end
 
