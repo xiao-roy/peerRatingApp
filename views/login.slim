@@ -1,17 +1,10 @@
-doctype html
-html lang="en"
-head
-  title Peer Rating Web Application
-  meta charset="utf-8"
-/ link href="/styles.css" rel="stylesheet" type="text/css"
-/ link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" /
-body
-  h1 Login!
-  form
-    p Username:
-    input type="text" name="username"
-    p Password:
-    input type="text" name="password"
-    br
-    br
-    input type="submit" value="Submit"
+h1 Login!
+form action="/login" method="POST"
+  label for="username" Username:
+  input#username type="text" name="username"
+  p
+  label for="password" Password:
+  input#password type="password" name="password"
+  br
+  br
+  input type="submit" value="Login"

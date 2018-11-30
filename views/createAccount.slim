@@ -1,21 +1,20 @@
-doctype html
-html lang="en"
-head
-  title Peer Rating Web Application
-  meta charset="utf-8"
-/ link href="/styles.css" rel="stylesheet" type="text/css"
-/ link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" /
-body
-  h1 Create An Account
-  form
-    p Enter Username:
-    input type="text" name="username"
-    p Enter Password:
-    input type="text" name="password"
-    p Confirm Password:
-    input type="text" name="password"
-    br
-    br
-    input type="submit" value="Submit"
-  h3 OR
-  h1 Upload CSV
+h1 Create An Account
+form method="POST" action="/userHome"
+  p Enter Username:
+  input#userName type="text" name="userName"
+  p Enter Password:
+  input#password type="text" name="password"
+  p Is your role student or TA?:
+  input#role type="radio" name="student" Student
+  br
+  input type="radio" name="TA" TA
+  br
+  br
+  input type="submit" value="Submit"
+h3 OR
+h1 Upload CSV
+form method="POST" action="/uploadSuccess"
+  input#users type="file" name="users" accept=".csv"
+  br
+  br
+  input type="submit"
