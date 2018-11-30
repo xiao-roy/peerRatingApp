@@ -1,0 +1,14 @@
+doctype html
+html lang="en"
+head
+  title Peer Rating Web Application
+  meta charset="utf-8"
+/ link href="/styles.css" rel="stylesheet" type="text/css"
+/ link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" /
+body
+  - if @users.any?
+    ul#users
+      -@users.each do |user|
+        li #{user.userName} #{user.role}
+  - else
+    p No songs have been created yet!
