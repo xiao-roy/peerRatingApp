@@ -58,15 +58,27 @@
       <Position>3</Position>
       <DataType>VARCHAR(50)|0s</DataType>
     </column>
-    <column id="19" parent="8" name="password">
+    <column id="19" parent="8" name="vote">
       <Position>4</Position>
-      <DataType>VARCHAR(50)|0s</DataType>
+      <DataType>Boolean|0s</DataType>
     </column>
-    <column id="20" parent="8" name="vote">
+    <column id="20" parent="8" name="password">
       <Position>5</Position>
       <DataType>VARCHAR(50)|0s</DataType>
     </column>
-    <key id="21" parent="8">
+    <column id="21" parent="8" name="firstPlace">
+      <Position>6</Position>
+      <DataType>VARCHAR(50)|0s</DataType>
+    </column>
+    <column id="22" parent="8" name="secondPlace">
+      <Position>7</Position>
+      <DataType>VARCHAR(50)|0s</DataType>
+    </column>
+    <column id="23" parent="8" name="thirdPlace">
+      <Position>8</Position>
+      <DataType>VARCHAR(50)|0s</DataType>
+    </column>
+    <key id="24" parent="8">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
