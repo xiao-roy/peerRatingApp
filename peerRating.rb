@@ -20,10 +20,12 @@ get '/userHome?' do
   @username = params['username']
   @password = params['password']
   @role = params['role']
+  (@role == 'TA') ? slim :userHomeTA : slim :userHomeStudent
+
   if params['users']
     addUsersFromCSV(params['users'])
   end
-  slim :userHome
+  slim :userHomeTA
 end
 # db = SQLite3::Database.new ":memory:"
 #
