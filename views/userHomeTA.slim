@@ -1,3 +1,8 @@
 h1 Welcome to your account
 h2= @username
 h2= @role
+
+h3 Upload CSV of Usernames:
+form action="/csvUpload"
+  input type="file" name="users" accept=".csv"
+  input type="submit"

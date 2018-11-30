@@ -35,27 +35,29 @@ get '/createAccount' do
   slim :createAccount
 end
 
-post '/userHome?' do
-  user = User.create(params[:user])
-end
-
 get '/csvUpload' do
   userFile = params[:users]
   if userFile
     addUsersFromCSV(userFile)
   end
   @users = User.all
-  slim :csvUpload
-  # redirect to('/userHome')
+  # slim :csvUpload
+  redirect to('/userHome')
 end
 
-get '/userHome?' do
-  @username = params['username']
-  @password = params['password']
-  @role = params['role']
-  if (@role == 'TA') ? (slim :userHomeTA) : (slim :userHomeStudent)
-  end
+get '/userHomeTA' do
   slim :userHomeTA
+end
+
+get '/userHomeStudent' do
+  slim :userHomeStudent
+end
+
+post '/userHome?' do
+  user = User.create(params[:user])
+  @role = user.role
+  if (@role == 'TA') ? (redirect to('/userHomeTA')) : (redirect to('/userHomeStudent'))
+  end
 end
 
 # db = SQLite3::Database.new ":memory:"
