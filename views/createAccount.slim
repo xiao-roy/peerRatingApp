@@ -10,8 +10,7 @@ form action="/userHome" method="POST"
   input type="submit" value="Submit"
 h3 OR
 h1 Upload CSV
-form method="POST" action="/uploadSuccess"
-  input#users type="file" name="users" accept=".csv"
-  br
-  br
+form action="/csvUpload"
+  input type="file" name="users" accept=".csv"
   input type="submit"
+  

@@ -39,14 +39,21 @@ post '/userHome?' do
   user = User.create(params[:user])
 end
 
+get '/csvUpload' do
+  userFile = params[:users]
+  if userFile
+    addUsersFromCSV(userFile)
+  end
+  @users = User.all
+  slim :csvUpload
+  # redirect to('/userHome')
+end
+
 get '/userHome?' do
   @username = params['username']
   @password = params['password']
   @role = params['role']
   if (@role == 'TA') ? (slim :userHomeTA) : (slim :userHomeStudent)
-  end
-  if params['users']
-    addUsersFromCSV(params['users'])
   end
   slim :userHomeTA
 end
