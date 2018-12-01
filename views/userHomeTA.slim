@@ -1,17 +1,20 @@
-h1 Welcome to your account
-h2= @username
-h2= @role
+div.container.float-left
+  h1 Welcome to your account!
+  h3= @username
+  h3= @role
 
-h3 Upload CSV of Usernames:
-form action="/csvUpload"
-  input type="file" name="users" accept=".csv"
-  input type="submit"
+  h4 Upload CSV of Usernames:
+  form.md-form action="/csvUpload"
+    div.btn.btn-secondary.btn-sm.float-left
+      input type="file" name="users" accept=".csv"
+    input.btn.btn-primary.btn-sm.float-right type="submit" value="Submit"
 
-h3 Upload Zip File of Webpages:
-form action="/zipUpload" method="POST"
-  input type="file" name="menus" accept=".zip"
-  input type="submit"
+  h4 Upload .zip file with Menus:
+  form.md-form action="/zipUpload" method="POST"
+    div.btn.btn-secondary.btn-sm.float-left
+      input type="file" name="menus" accept=".zip"
+    input.btn.btn-primary.btn-sm.float-right type="submit" value="Submit"
 
-h3 Download Voting Records:
-form action="/csvDownload"
+  h3 Download Voting Records:
+  form action="/csvDownload"
   input type="submit" value="Download"
