@@ -2,12 +2,15 @@ require 'sinatra'
 require 'slim'
 require 'csv'
 require 'sqlite3'
+require 'bcrypt'
+require 'sass'
 require './user'
 
 # configure do
 #   enable :sessions
 #   set :username, 'frank'
-#
+#   set :password, BCrypt::Password.new("$2a$10$GKGxT1l1G08A6FjXt/R/yu1uyUdpsQG.K9kUN7DG6uxGn9iUM.vrW")
+#   password is frank
 # end
 
 get ('/styles.css') { scss :styles }
@@ -39,6 +42,10 @@ SQL
     else
       slim :login
     end
+end
+
+get '/vote' do
+  slim :vote
 end
 
 get '/createAccount' do
@@ -84,6 +91,10 @@ get '/csvDownload' do
       csv << [voter.id, voter.user_name, voter.vote, voter.firstPlace, voter.secondPlace, voter.thirdPlace]
     end
   end
+end
+
+not_found do
+  slim :not_found
 end
 
 # db = SQLite3::Database.new ":memory:"

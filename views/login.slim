@@ -1,11 +1,9 @@
-h1 Login!
-form action="/loginTest" method="GET"
-  label for="username" Username:
-  input#username type="text" name="userName"
-  p
-  label for="password" Password:
-  input#password type="password" name="password"
-  br
-  br
-  input type="submit" value="Login"
- 
+div.container-fluid
+  form.form-signin action="/loginTest" method="GET"
+    h2.form-signin-heading ~Sign In~
+    label.sr-only for="username" Username
+    input.form-control#username placeholder="Username" type="text" name="username"
+    label.sr-only for="password" Password
+    input.form-control#password placeholder="Password" type="password" name="password"
+    button.btn.btn-lg.btn-primary.btn-block type="submit" value="Login" Login
+    
