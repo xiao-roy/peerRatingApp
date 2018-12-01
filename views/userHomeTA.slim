@@ -7,7 +7,11 @@ form action="/csvUpload"
   input type="file" name="users" accept=".csv"
   input type="submit"
 
-h3 Upload CSV of Usernames:
-form action="/zipUpload"
+h3 Upload Zip File of Webpages:
+form action="/zipUpload" method="POST"
   input type="file" name="menus" accept=".zip"
   input type="submit"
+
+h3 Download Voting Records:
+form action="/csvDownload"
+  input type="submit" value="Download"
