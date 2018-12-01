@@ -6,8 +6,7 @@ DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/users.db")
 
 class User
   include DataMapper::Resource
-  property :id, Serial
-  property :user_name, String
+  property :userName, String, :key => true
   property :role, String
   property :password, String
   property :vote, Boolean
@@ -21,7 +20,7 @@ DataMapper.finalize()
 def addUsersFromCSV(filepath)
   csvUsers = CSV.read(filepath)
   for users in csvUsers
-    User.create(user_name: users[0], role: users[2], password: users[1], vote: FALSE)
+    User.create(userName: users[0], role: users[2], password: users[1], vote: FALSE)
   end
 end
 

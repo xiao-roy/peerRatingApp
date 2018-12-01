@@ -29,7 +29,7 @@ end
 
 get '/loginTest' do
 id = user.db.execute <<-SQL
-  SELECT id FROM users WHERE userName = '#{params[:user_name]}' AND password = '#{params[:password]}';
+  SELECT id FROM users WHERE userName = '#{params[:userName]}' AND password = '#{params[:password]}';
 SQL
     # @user = User.get(params[:userName])
     # puts @user.userName
@@ -88,7 +88,7 @@ get '/csvDownload' do
   attachment "voterData.csv"
   csv_string = CSV.generate do |csv|
     for voter in @users
-      csv << [voter.id, voter.user_name, voter.vote, voter.firstPlace, voter.secondPlace, voter.thirdPlace]
+      csv << [voter.id, voter.userName, voter.vote, voter.firstPlace, voter.secondPlace, voter.thirdPlace]
     end
   end
 end
