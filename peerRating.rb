@@ -5,13 +5,7 @@ require 'sqlite3'
 require 'bcrypt'
 require 'sass'
 require './user'
-
-# configure do
-#   enable :sessions
-#   set :username, 'frank'
-#   set :password, BCrypt::Password.new("$2a$10$GKGxT1l1G08A6FjXt/R/yu1uyUdpsQG.K9kUN7DG6uxGn9iUM.vrW")
-#   password is frank
-# end
+include BCrypt
 
 get ('/styles.css') { scss :styles }
 
@@ -27,21 +21,21 @@ get '/error' do
   slim :error
 end
 
-get '/loginTest' do
-id = user.db.execute <<-SQL
-  SELECT id FROM users WHERE userName = '#{params[:userName]}' AND password = '#{params[:password]}';
-SQL
-    # @user = User.get(params[:userName])
-    # puts @user.userName
-    if @user
+post '/login' do
+  @user = User.get(params[:userName])
+  if @user
+    if BCrypt::Password.new(@user.password) == params[:password]
       if @user.role == 'TA'
         redirect to('/userHomeTA')
       elsif @user.role == 'student'
         redirect to('/userHomeStudent')
       end
     else
-      slim :login
+      slim :error
     end
+  else
+    slim :error
+  end
 end
 
 get '/vote' do
@@ -76,6 +70,8 @@ post '/userHome' do
   #   redirect to '/error'
   # else
     @user = User.create(params[:user])
+    @user.update(:password => BCrypt::Password.create(@user.password))
+    @user.reload
     @role = @user.role
     if (@role == 'TA') ? (redirect to('/userHomeTA')) : (redirect to('/userHomeStudent'))
     end
@@ -96,25 +92,3 @@ end
 not_found do
   slim :not_found
 end
-
-# db = SQLite3::Database.new ":memory:"
-#
-# # Create a database
-# rows = db.execute <<-SQL
-#   create table users (
-#     name varchar(30),
-#     age int
-#   );
-# SQL
-#
-# csv = <<CSV
-# name,age
-# ben,12
-# sally,39
-# CSV
-#
-# CSV.parse(csv, headers: true) do |row|
-#   db.execute "insert into users values ( ?, ? )", row.fields # equivalent to: [row['name'], row['age']]
-# end
-#
-# db.execute( "select * from users" ) # => [["ben", 12], ["sally", 39]]
