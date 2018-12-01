@@ -3,13 +3,19 @@ html lang="en"
   head
     title== @title || "Peer Rating Web Application"
     meta charset="utf-8"
-    /link href="/styles.css" rel="stylesheet" type="text/css"
+    link href="/styles.css" rel="stylesheet" type="text/css"
 / link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" /
 body
   header
-    h1 Peer Rating
-  - if session[:user]
-    a href="/logout" title="Logout" Logout
-  - else
-    a href="/login" title="Login" Login
+    nav.navbar.navbar-inverse.container-fluid
+        div.navbar-header
+          span.navbar-brand Peer Rating
+        ul.nav.navbar-nav
+          li <a href="/"> Home </a>
+          li <a href="/vote"> PokemonPolls </a>
+          - if session[:user]
+            li <a href="/logout" title="Logout"> Logout </a>
+          - else
+            li.nav-item <a href="/login" title="Login"> Login </a>
+            li.nav-item <a href="/createAccount"> Create an account </a>
   == yield
