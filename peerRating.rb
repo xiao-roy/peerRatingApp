@@ -66,7 +66,7 @@ get '/userHomeStudent' do
 end
 
 post '/userHome' do
-  # if params[:user]["userName"] !=~ /\A[a-z0-9_]{4,16}\z/
+  # if (/\A[a-z0-9_]{4,16}\z/.match(params[:user]["userName"])) == nil
   #   redirect to '/error'
   # else
     @user = User.create(params[:user])
