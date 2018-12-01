@@ -17,7 +17,6 @@ get '/' do
 end
 
 get '/login' do
-
   slim :login
 end
 
@@ -25,9 +24,12 @@ get '/error' do
   slim :error
 end
 
-post '/login' do
-    @user = User.get(userName: params["username"])
-    puts @user.userName
+get '/loginTest' do
+id = user.db.execute <<-SQL
+  SELECT id FROM users WHERE userName = '#{params[:user_name]}' AND password = '#{params[:password]}';
+SQL
+    # @user = User.get(params[:userName])
+    # puts @user.userName
     if @user
       if @user.role == 'TA'
         redirect to('/userHomeTA')
@@ -51,7 +53,7 @@ get '/csvUpload' do
   end
   @users = User.all
   # slim :csvUpload
-  redirect to('/userHome')
+  # redirect to('/userHome')
 end
 
 get '/userHomeTA' do
@@ -62,13 +64,24 @@ get '/userHomeStudent' do
   slim :userHomeStudent
 end
 
-post '/userHome?' do
-  if params[:user]["userName"] !=~ /\A[a-z0-9_]{4,16}\z/
-    redirect to '/error'
-  else
+post '/userHome' do
+  # if params[:user]["userName"] !=~ /\A[a-z0-9_]{4,16}\z/
+  #   redirect to '/error'
+  # else
     @user = User.create(params[:user])
     @role = @user.role
     if (@role == 'TA') ? (redirect to('/userHomeTA')) : (redirect to('/userHomeStudent'))
+    end
+  # end
+end
+
+get '/csvDownload' do
+  @users = User.all
+  content_type 'application/csv'
+  attachment "voterData.csv"
+  csv_string = CSV.generate do |csv|
+    for voter in @users
+      csv << [voter.id, voter.user_name, voter.vote, voter.firstPlace, voter.secondPlace, voter.thirdPlace]
     end
   end
 end
