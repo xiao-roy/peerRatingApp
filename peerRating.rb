@@ -31,6 +31,10 @@ post '/login' do
     end
 end
 
+get '/vote' do
+  slim :vote
+end
+
 get '/createAccount' do
   @user = User.new
   slim :createAccount
