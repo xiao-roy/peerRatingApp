@@ -3,6 +3,7 @@ require 'slim'
 require 'csv'
 require 'sqlite3'
 require 'bcrypt'
+require 'sass'
 require './user'
 
 # configure do
